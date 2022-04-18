@@ -14,7 +14,7 @@ for item in templates_str:
     # print("---%s---" % (time.time() - prev_time))
 
 
-print("общее время загрузки данных %s" % (time.time() - start_time))
+print("общее время загрузки данных при загрузке сетом %s" % (time.time() - start_time))
 
 start_time = time.time()
 
@@ -22,7 +22,7 @@ for item in templates_str:
     client.get(item['name'])
     # print("---%s---" % (time.time() - prev_time))
 
-print("общее время получения данных %s" % (time.time() - start_time))
+print("общее время получения данных при выгрузке гетом %s" % (time.time() - start_time))
 
 for item in templates_str:
     client.delete(item['name'])
@@ -33,13 +33,13 @@ for item in templates_str:
     client.lpush(item['name'], item['age'])
     # print("---%s---" % (time.time() - prev_time))
 
-print("общее время загрузки данных %s" % (time.time() - start_time))
+print("общее время загрузки данных при загрузке в лист %s" % (time.time() - start_time))
 start_time = time.time()
 for item in templates_str:
     client.lpop(item['name'])
     # print("---%s---" % (time.time() - prev_time))
 
-print("общее время получения данных %s" % (time.time() - start_time))
+print("общее время получения данных из листа %s" % (time.time() - start_time))
 
 # -----------------------------------------------------
 start_time = time.time()
@@ -52,13 +52,13 @@ for item in templates_hset:
     # print("---%s---" % (time.time() - prev_time))
 
 
-print("общее время загрузки данных %s" % (time.time() - start_time))
+print("общее время загрузки данных в hset %s" % (time.time() - start_time))
 start_time = time.time()
 for item in templates_hset:
     client.hgetall(item['name'])
     # print("---%s---" % (time.time() - prev_time))
 
-print("общее время получения данных %s" % (time.time() - start_time))
+print("общее время получения данных из hset %s" % (time.time() - start_time))
 
 for item in templates_hset:
     client.delete(item['name'])
@@ -70,11 +70,11 @@ for item in templates_str:
     client.zadd('persons', {item['name']: item['age']})
     # print("---%s---" % (time.time() - prev_time))
 
-print("общее время загрузки данных %s" % (time.time() - start_time))
+print("общее время загрузки данных в сортированный список %s" % (time.time() - start_time))
 
 start_time = time.time()
 client.zrange('persons', 0, len(templates_str))
 
-print("общее время получения данных %s" % (time.time() - start_time))
+print("общее время получения данных из zset %s" % (time.time() - start_time))
 client.delete('persons')
 client.close()
